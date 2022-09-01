@@ -1,0 +1,11 @@
+@media (min-width: 992px) {
+    .navbar-nav {
+        padding-left: 60em;
+    }
+}
+label{
+    color:green;
+}
+input{
+    background-color: #D6D6D6;
+}
