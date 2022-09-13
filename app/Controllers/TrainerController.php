@@ -7,6 +7,7 @@ use App\Models\AssignmentModel;
 use App\Models\CommentModel;
 use App\Models\ContentModel;
 use App\Models\CustomModel;
+use App\Models\SubmissionModel;
 use App\Models\UserModel;
 
 class TrainerController extends BaseController{
@@ -54,11 +55,11 @@ class TrainerController extends BaseController{
 
         if(count($trainers)>0){
             session()->set('trainer',$trainers[0]);
-            return $this->showPage('Home');
+            return $this->showPage('Intro');
         }
         else{
             echo '<script> alert("Unknown trainer !"); </script>';
-            return $this->showPage('Login');
+            return $this->showPage('Intro');
         }
     }
 
@@ -180,6 +181,20 @@ class TrainerController extends BaseController{
         $appointmentModel->updateAppointment($conditions, $data);
         echo '<script> alert("Appointment successfully updated !"); </script>';
         return $this->showPage('Appointments');
+    }
+
+    public function markSubmission(){
+        $submissionModel=new SubmissionModel();
+
+        $submissionId=$this->request->getPost('SubmissionId');
+        $marks=$this->request->getPost('Marks');
+        $data=[
+            'Marks'=>$marks,
+            'Marked'=>1,
+        ];
+        $submissionModel->updateSubmission(['SubmissionId'=>$submissionId],$data);
+        echo '<script> alert("Submission Successfully marked ! ") </script>';
+        return $this->showPage('Assignments');
     }
 
     public function logout(){

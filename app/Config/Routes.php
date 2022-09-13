@@ -87,6 +87,7 @@ $trainer_routes=[
 
     'TrainerAddAppointment/'=>'TrainerController::addAppointment',
     'TrainerUpdateAppointment/'=>'TrainerController::updateAppointment',
+    'TrainerMarkSubmission/'=>'TrainerController::markSubmission',
 ];
 foreach ($trainer_routes as $route=>$function){
     $routes->match(['get','post'], $route, $function);

@@ -80,6 +80,9 @@ $assignments = $assignmentModel->getAssignmentsWhereIn('UnitId', $unitIds);
                         <div style="color:white; margin:1em; padding:0.3em; font-size:1.5em;"> <a href="<?= base_url('TraineeShowPage/Assignments') ?>" style="text-decoration: none; color:yellow;"> <i class="bi bi-pencil-square"></i> Assignments </a> </div>
                     </div>
                     <div class="row">
+                        <div style="color:white; margin:1em; padding:0.3em; font-size:1.5em;"> <a href="<?= base_url('TraineeShowPage/Submissions') ?>" style="text-decoration: none; color:white;"> <i class="bi bi-person-lines-fill"></i> Submissions </a> </div>
+                    </div>
+                    <div class="row">
                         <div style="color:white; margin:1em; padding:0.3em; font-size:1.5em;"> <a href="<?= base_url('TraineeShowPage/Appointments') ?>" style="text-decoration: none; color:white;"> <i class="bi bi-calendar"></i> Appointments </a> </div>
                     </div>
                     <div class="row">

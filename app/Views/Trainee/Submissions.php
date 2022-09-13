@@ -1,11 +1,3 @@
-<?php
-
-use App\Models\SubmissionModel;
-
-$submissionModel = new SubmissionModel();
-$assignmentId = $_GET['AssignmentId'];
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,7 +35,7 @@ $assignmentId = $_GET['AssignmentId'];
                     <h5 class="py-2 text-white"> </h5>
                 </div>
                 <ul class="navbar-nav">
-                    <li class="nav-item"> <i class="bi bi-app-indicator"></i> <span style="color:white; font-weight:bold;"> <?= session()->get('trainer')['FirstName'] . ' ' . session()->get('trainer')['LastName'] ?> </span> </li>
+                    <li class="nav-item"> <i class="bi bi-app-indicator"></i> <span style="color:white; font-weight:bold;"> <?= session()->get('trainee')['FirstName'] . ' ' . session()->get('trainee')['LastName'] ?> </span> </li>
                 </ul>
             </div>
         </nav>
@@ -51,30 +43,40 @@ $assignmentId = $_GET['AssignmentId'];
             <div class="col-md-3" style="background-color: #005149;text-align:center;">
                 <div class="container-fluid">
                     <div class="row">
-                        <div style="color:white; margin:1em; padding:0.3em; font-size:1.5em;"> <a href="<?= base_url('TrainerShowPage/Home') ?>" style="text-decoration: none; color:white;"> <i class="bi bi-person-lines-fill"></i> Profile </a> </div>
+                        <div style="color:white; margin:1em; padding:0.3em; font-size:1.5em;"> <a href="<?= base_url('TraineeShowPage/Home') ?>" style="text-decoration: none; color:white;"> <i class="bi bi-person-lines-fill"></i> Profile </a> </div>
                     </div>
                     <div class="row">
-                        <div style="color:white; margin:1em; padding:0.3em; font-size:1.5em;"> <a href="<?= base_url('TrainerShowPage/Units') ?>" style="text-decoration: none; color:white;"> <i class="bi bi-book-half"></i> Units </a> </div>
+                        <div style="color:white; margin:1em; padding:0.3em; font-size:1.5em;"> <a href="<?= base_url('TraineeShowPage/Courses') ?>" style="text-decoration: none; color:white;"> <i class="bi bi-journal-album"></i> Courses </a> </div>
                     </div>
                     <div class="row">
-                        <div style="color:white; margin:1em; padding:0.3em; font-size:1.5em;"> <a href="<?= base_url('TrainerShowPage/Contents') ?>" style="text-decoration: none; color:white;"> <i class="bi bi-journal"></i> Contents </a> </div>
+                        <div style="color:white; margin:1em; padding:0.3em; font-size:1.5em;"> <a href="<?= base_url('TraineeShowPage/Units') ?>" style="text-decoration: none; color:white;"> <i class="bi bi-book-half"></i> Units </a> </div>
+                    </div>
+                    <div class="row">
+                        <div style="color:white; margin:1em; padding:0.3em; font-size:1.5em;"> <a href="<?= base_url('TraineeShowPage/Contents') ?>" style="text-decoration: none; color:white;"> <i class="bi bi-journal"></i> Contents </a> </div>
+                    </div>
+                    <div class="row">
+                        <div style="color:white; margin:1em; padding:0.3em; font-size:1.5em;"> <a href="<?= base_url('TraineeShowPage/Assignments') ?>" style="text-decoration: none; color:white;"> <i class="bi bi-pencil-square"></i> Assignments </a> </div>
                     </div>
                     <div class="row" style="background-color: #222A2A; margin-right:-10%; margin-left:-10%;">
-                        <div style="color:white; margin:1em; padding:0.3em; font-size:1.5em;"> <a href="<?= base_url('TrainerShowPage/Assignments') ?>" style="text-decoration: none; color:yellow;"> <i class="bi bi-pencil-square"></i> Go Back <br> to Assignments </a> </div>
+                        <div style="color:white; margin:1em; padding:0.3em; font-size:1.5em;"> <a href="<?= base_url('TraineeShowPage/Submissions') ?>" style="text-decoration: none; color:yellow;"> <i class="bi bi-person-lines-fill"></i> Submissions </a> </div>
                     </div>
                     <div class="row">
-                        <div style="color:white; margin:1em; padding:0.3em; font-size:1.5em;"> <a href="<?= base_url('TrainerShowPage/Appointments') ?>" style="text-decoration: none; color:white;"> <i class="bi bi-calendar"></i> Appointments </a> </div>
+                        <div style="color:white; margin:1em; padding:0.3em; font-size:1.5em;"> <a href="<?= base_url('TraineeShowPage/Appointments') ?>" style="text-decoration: none; color:white;"> <i class="bi bi-calendar"></i> Appointments </a> </div>
                     </div>
                     <div class="row">
-                        <div style="color:white; margin:1em; padding:0.3em; font-size:1.5em;"> <a href=<?= base_url('TrainerLogout/') ?> style="text-decoration: none; color:white"> <i class="bi bi-box-arrow-right"></i> Logout </a> </div>
+                        <div style="color:white; margin:1em; padding:0.3em; font-size:1.5em;"> <a href=<?= base_url('TraineeLogout/') ?> style="text-decoration: none; color:white"> <i class="bi bi-box-arrow-right"></i> Logout </a> </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-9">
-                <button class="btn btn-primary" style="width:90%;margin-left:3em; margin-right:3em; margin-top:1em; margin-bottom:2em;"> Submissions </button>
+                <button class="btn btn-primary" style="width:90%;margin-left:3em; margin-right:3em; margin-top:1em; margin-bottom:2em;"> My Submissions </button>
                 <div>
                     <?php
-                    $submissions = $submissionModel->getSubmissionsWhere(['assignmentId' => $assignmentId]);
+
+                    use App\Models\SubmissionModel;
+
+                    $submissionModel = new SubmissionModel();
+                    $submissions = $submissionModel->getSubmissionsWhere(['TraineeId' => session('trainee')['UserId']]);
                     if ($submissions) {
                         foreach ($submissions as $submission) {
                     ?>

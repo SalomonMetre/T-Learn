@@ -54,7 +54,7 @@ class TraineeController extends BaseController{
 
         if(count($trainees)>0){
             session()->set('trainee',$trainees[0]);
-            return $this->showPage('Home');
+            return $this->showPage('Intro');
         }
         else{
             echo '<script> alert("Unknown trainee !"); </script>';
@@ -138,8 +138,11 @@ class TraineeController extends BaseController{
         $data=[
             'AssignmentId'=>$assignmentId,
             'UnitId'=>$unitId,
+            'TraineeId'=>session('trainee')['UserId'],
             'TraineeName'=>session('trainee')['FirstName'].' '.session('trainee')['LastName'],
             'FileName'=>$fileName,
+            'Marked'=>0,
+            'Marks'=>0,
         ];
         $submissionModel->addSubmission($data);
         echo '<script> alert("Work successfully submitted !"); </script>';

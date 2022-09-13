@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 class SubmissionModel extends Model{
     protected $table='submissions';
     protected $primaryKey='SubmissionId';
-    protected $allowedFields=['SubmissionId','AssignmentId','UnitId','TraineeName','FileName','Time'];
+    protected $allowedFields=['SubmissionId','AssignmentId','UnitId','TraineeId','TraineeName','FileName','Marked','Marks','Time'];
 
     protected $db, $builder;
     public function __construct(){
